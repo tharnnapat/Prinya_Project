@@ -15,11 +15,9 @@
 # limitations under the License.
 #
 import os
-import jinja2
+import cgi
 import webapp2
 from google.appengine.api import rdbms
-import webapp2
-
 import jinja2
 
 JINJA_ENVIRONMENT = jinja2.Environment(
@@ -32,22 +30,16 @@ class MainHandler(webapp2.RequestHandler):
 	def get(self):
 
 		conn = rdbms.connect(instance=_INSTANCE_NAME, database='Prinya_Project')
-    		cursor = conn.cursor()
-		cursor.execute('SELECT email,password FROM student')
-
-
-		templates = {
-
-			'page_title' : 'Template Workshop',
-
-			'run' : cursor.fetchall(),
-
+    	cursor = conn.cursor()
+    	cursor.execute('SELECT * FROM course')
+    	templates = {
+    		'run' : cursor.fetchall()
 			}
 
-		template = JINJA_ENVIRONMENT.get_template('index.html')
+	template = JINJA_ENVIRONMENT.get_template('course.html')
 
-		self.response.write(template.render(templates))
-		conn.close();
+	self.response.write(template.render(templates))
+	conn.close();
 
 app = webapp2.WSGIApplication([
 
