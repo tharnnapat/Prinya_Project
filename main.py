@@ -30,20 +30,43 @@ _INSTANCE_NAME="prinya-th-2013:prinya-db"
 class MainHandler(webapp2.RequestHandler):
 	def get(self):
 
-		conn = rdbms.connect(instance=_INSTANCE_NAME, database='Prinya_Project')
-    		cursor = conn.cursor()
-		cursor.execute('SELECT number,title,credit,status FROM course natural join regiscourse')
-
-
 		templates = {
 
-			'course' : cursor.fetchall(),
+			# 'course' : cursor.fetchall(),
 
 			}
 
-		template = JINJA_ENVIRONMENT.get_template('course.html')
+		template = JINJA_ENVIRONMENT.get_template('credit.html')
 		self.response.write(template.render(templates))
+
+class InsertCredit(webapp2.RequestHandler):
+	def post(self):
+		group_name = self.request.get('group_name');
+		faculity = self.request.get('faculity2');
+		department = self.request.get('department2');
+		flat_rate = self.request.get('flat_rate');
+		price_per_credit = self.request.get('price_per_credit');	
+		tuition = self.request.get('tuition');
+
+		if tuition=="flat_rate":
+			tuition = flat_rate 
+		else:
+			tuition = price_per_credit
+		# self.response.write(group_name)
+		# self.response.write(faculity)
+		# self.response.write(department)
+		# self.response.write(flat_rate)
+		# self.response.write(price_per_credit)
+		# self.response.write(tuition)
+
+		conn = rdbms.connect(instance=_INSTANCE_NAME, database='Prinya_Project')
+    		cursor = conn.cursor()
+		cursor.execute("""INSERT into CreditPrice (faculity,department,group,price) 
+            values (%s,%s,%s,%s)""",(faculity,department,group_name,tuition))
+
 		conn.close();
+
 app = webapp2.WSGIApplication([
-    ('/', MainHandler)
+    ('/', MainHandler),
+    ('/InsertCredit', InsertCredit),
 ], debug=True)

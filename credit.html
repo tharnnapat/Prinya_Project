@@ -1,5 +1,4 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-{% autoescape true %}
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -8,10 +7,11 @@
 <!--
 -->
 </style>
-<link href="css/main.css" rel="stylesheet" type="text/css" />
+<link href="main.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
+    <form id="form1" name="form1" method="post" action="/InsertCredit">
 <table width="900" border="0" align="center" cellpadding="0" cellspacing="0">
   <tr>
     <td>&nbsp;</td>
@@ -27,7 +27,7 @@
   </tr>
   <tr>
     <td bgcolor="#FFFF66">
-    <form id="form1" name="form1" method="post" action="">
+
       <table width="900" border="0" cellpadding="10" cellspacing="0" id="row3">
         <tr align="center">
           <td width="200"><label>
@@ -77,41 +77,75 @@
             </label></td>
         </tr>
       </table>
-    </form>
     </td>
   </tr>
   <tr>
-    <td align="center" bgcolor="#FFFF66"><table width="900" border="1" cellpadding="10" cellspacing="0">
-      <tr class="font1">
-        <td width="100" align="center" bgcolor="#FFCC33">Code</td>
-        <td width="200" align="center" bgcolor="#FFCC33">Name</td>
-        <td width="100" align="center" bgcolor="#FFCC33">Credit</td>
-        <td width="100" align="center" bgcolor="#FFCC33">Enrolled</td>
-        <td width="150" align="center" bgcolor="#FFCC33">Status</td>
-        <td align="center" bgcolor="#FFCC33">&nbsp;</td>
-      </tr>
-            {% for row in course  %}
+    <td align="center" bgcolor="#FFFF66"><table width="600" border="0" cellspacing="0" cellpadding="10">
       <tr>
-        <td align="center"><a href="../Documents/prinyaproject/prinya-ailada/course_detail.html?emp_id={{ row[0]}} ?&gt;">{{ row[0] }}</a></td>
-        <td align="center">{{ row[1] }}</td>
-        <td align="center">{{ row[2] }}</td>
-        <td align="center">100</td>
-        <td align="center">{{ row[3] }}</td>
-        <td align="center">button</td>
+        <td width="250">Group Name</td>
+        <td width="100">Tuition Free</td>
+        <td>Flat Rate</td>
       </tr>
-      	    {% endfor %}
+      <tr>
+        <td width="250"><label>
+          <input type="text" name="group_name" id="group_name" />
+        </label></td>
+        <td width="100">&nbsp;</td>
+        <td><label>
+          <input type="radio" name="tuition" id="price" value="flat_rate" />
+          <input type="text" name="flat_rate" id="flat_rate" />
+        </label></td>
+      </tr>
+      <tr>
+        <td width="250">Faculity</td>
+        <td width="100">&nbsp;</td>
+        <td>Price per Credit</td>
+      </tr>
+      <tr>
+        <td width="250"><label>
+          <select name="faculity2" id="faculity2">
+            <option value="engineering">Engineering</option>
+            <option value="information technology">Information technology</option>
+            <option value="business">Business </option>
+          </select>
+        </label></td>
+        <td width="100">&nbsp;</td>
+        <td><label>
+          <input type="radio" name="tuition" id="price2" value="price_per_credit" />
+          <input type="text" name="price_per_credit" id="price_per_credit" />
+        </label></td>
+      </tr>
+      <tr>
+        <td width="250">Department</td>
+        <td width="100">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
+      <tr>
+        <td width="250"><select name="department2" id="department2">
+          <option value="IT">IT</option>
+          <option value="MT">MT</option>
+          <option value="BI">BI</option>
+          <option value="BA">BA</option>
+          <option value="IM">IM</option>
+          <option value="IB">IB</option>
+          <option value="BJ">BJ</option>
+          <option value="CE">CE</option>
+          <option value="PE">PE</option>
+          <option value="AE">AE</option>
+          <option value="EE">EE</option>
+          <option value="AC">AC</option>
+        </select></td>
+        <td width="100">&nbsp;</td>
+        <td>&nbsp;</td>
+      </tr>
     </table></td>
   </tr>
   <tr>
-    <td bgcolor="#FFFF66"><table width="900" border="0" cellpadding="10" cellspacing="0" id="footer">
-      <tr>
-        <td><a href="../Documents/prinyaproject/prinya-ailada/course_create.html">Create</a></td>
-        <td>&nbsp;</td>
-        <td>&nbsp;</td>
-      </tr>
-    </table></td>
-  </tr>
+    <td align="center" bgcolor="#FFFF66"><label>
+      <input type="submit" name="add_group" id="add_group" value="Add Group" />
+    </label></td>
+  </tr>    
 </table>
+  </form>
 </body>
 </html>
-{% endautoescape %}
