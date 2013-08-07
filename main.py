@@ -61,7 +61,7 @@ class InsertCredit(webapp2.RequestHandler):
 
 		conn = rdbms.connect(instance=_INSTANCE_NAME, database='Prinya_Project')
     		cursor = conn.cursor()
-		cursor.execute("""INSERT into CreditPrice (faculity,department,creditprice.group,price) 
+		cursor.execute("""INSERT into creditprice (faculity,department,creditprice.group,price) 
             values (%s,%s,%s,%s)""",(faculity,department,group_name,tuition))
 
 		conn.close();
