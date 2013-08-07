@@ -14,11 +14,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+import webapp2
 import os
-import cgi
+import jinja2
 import webapp2
 from google.appengine.api import rdbms
-import jinja2
+
 
 JINJA_ENVIRONMENT = jinja2.Environment(
 	loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -30,19 +31,19 @@ class MainHandler(webapp2.RequestHandler):
 	def get(self):
 
 		conn = rdbms.connect(instance=_INSTANCE_NAME, database='Prinya_Project')
-    	cursor = conn.cursor()
-    	cursor.execute('SELECT * FROM course')
-    	templates = {
-    		'run' : cursor.fetchall()
+    		cursor = conn.cursor()
+		cursor.execute('SELECT number,title,credit,status FROM course natural join regiscourse')
+
+
+		templates = {
+
+			'course' : cursor.fetchall(),
+
 			}
 
-	template = JINJA_ENVIRONMENT.get_template('course.html')
-
-	self.response.write(template.render(templates))
-	conn.close();
-
+		template = JINJA_ENVIRONMENT.get_template('course.html')
+		self.response.write(template.render(templates))
+		conn.close();
 app = webapp2.WSGIApplication([
-
-('/', MainHandler),
-
+    ('/', MainHandler)
 ], debug=True)

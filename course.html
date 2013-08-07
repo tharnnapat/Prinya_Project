@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+{% autoescape true %}
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -7,7 +8,7 @@
 <!--
 -->
 </style>
-<link href="main.css" rel="stylesheet" type="text/css" />
+<link href="css/main.css" rel="stylesheet" type="text/css" />
 </head>
 
 <body>
@@ -89,22 +90,22 @@
         <td width="150" align="center" bgcolor="#FFCC33">Status</td>
         <td align="center" bgcolor="#FFCC33">&nbsp;</td>
       </tr>
-            {% for row in student  %}
+            {% for row in course  %}
       <tr>
-        <td align="center"><a href="course_detail.html?emp_id={{ row[0]}} ?>">{{ row[0] }}</a></td>
-        <td align="center">{{ row[0] }}</td>
-        <td align="center">{{ row[0] }}</td>
-        <td align="center">{{ row[0] }}</td>
-        <td align="center">{{ row[0] }}</td>
-        <td align="center">{{ row[0] }}</td>
+        <td align="center"><a href="../Documents/prinyaproject/prinya-ailada/course_detail.html?emp_id={{ row[0]}} ?&gt;">{{ row[0] }}</a></td>
+        <td align="center">{{ row[1] }}</td>
+        <td align="center">{{ row[2] }}</td>
+        <td align="center">100</td>
+        <td align="center">{{ row[3] }}</td>
+        <td align="center">button</td>
       </tr>
-      	    {% for row in student  %}
+      	    {% endfor %}
     </table></td>
   </tr>
   <tr>
     <td bgcolor="#FFFF66"><table width="900" border="0" cellpadding="10" cellspacing="0" id="footer">
       <tr>
-        <td><a href="course_create.html">Create</a></td>
+        <td><a href="../Documents/prinyaproject/prinya-ailada/course_create.html">Create</a></td>
         <td>&nbsp;</td>
         <td>&nbsp;</td>
       </tr>
@@ -113,3 +114,4 @@
 </table>
 </body>
 </html>
+{% endautoescape %}
